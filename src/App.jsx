@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import ProductList from "./components/ProductList";
-import ProductDetails from "./components/ProductDetails";
+import CartPage from "./components/CartPage";
 import CartModal from "./components/CartModal";
 
 const App = () => {
@@ -13,12 +13,12 @@ const App = () => {
 
   return (
     <Router>
-      <div class="font-sans min-h-screen">
+      <div className="App">
         <Navbar cartCount={cart.length} onCartClick={toggleModal} />
         {showModal && <CartModal cart={cart} setCart={setCart} onClose={toggleModal} />}
         <Routes>
           <Route path="/" element={<ProductList cart={cart} setCart={setCart} />} />
-          <Route path="/product/:id" element={<ProductDetails cart={cart} setCart={setCart} />} />
+          <Route path="/cart" element={<CartPage cart={cart} setCart={setCart} />} />
         </Routes>
       </div>
     </Router>

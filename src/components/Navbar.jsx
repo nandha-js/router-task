@@ -2,20 +2,16 @@ import React from "react";
 
 const Navbar = ({ cartCount, onCartClick }) => {
   return (
-    <nav style={{ display: "flex", justifyContent: "space-between", padding: "10px 20px", backgroundColor: "#333", color: "#fff" }}>
-      <h2 style={{ cursor: "pointer" }} onClick={() => window.location.href = "/"}>
+    <nav className="flex justify-between items-center bg-gray-800 text-white p-4 shadow-md">
+      <h2
+        className="text-xl font-bold cursor-pointer"
+        onClick={() => window.location.href = "/"}
+      >
         Online Shop
       </h2>
       <button
         onClick={onCartClick}
-        style={{
-          backgroundColor: "#4CAF50",
-          color: "white",
-          padding: "8px 16px",
-          border: "none",
-          borderRadius: "8px",
-          cursor: "pointer",
-        }}
+        className="bg-red-600 text-white px-6 py-2 rounded-lg transition duration-300 hover:bg-red-700"
       >
         Cart ({cartCount})
       </button>
