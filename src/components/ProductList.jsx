@@ -11,21 +11,14 @@ const ProductList = ({ cart, setCart }) => {
       .then((data) => setProducts(data));
   }, []);
 
-  // Add product to cart
+  // Add product to cart with alert
   const addToCart = (product) => {
     const existing = cart.find((item) => item.id === product.id);
     if (existing) {
-      // Update quantity if product is already in cart
-      setCart(
-        cart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        )
-      );
+      alert("⚠️ Product is already in the cart!");
     } else {
-      // Add new product to cart
       setCart([...cart, { ...product, quantity: 1 }]);
+      alert("✅ Product added to the cart!");
     }
   };
 
