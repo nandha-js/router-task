@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
-import { useNavigate } from "react-router-dom";
 
 const ProductList = ({ cart, setCart }) => {
   const [products, setProducts] = useState([]);
-  const navigate = useNavigate();
 
   // Fetch products from FakeStoreAPI
   useEffect(() => {
@@ -17,14 +15,16 @@ const ProductList = ({ cart, setCart }) => {
   const addToCart = (product) => {
     const existing = cart.find((item) => item.id === product.id);
     if (existing) {
-      alert("⚠️ Product already in the cart!");
+      // Update quantity if product is already in cart
       setCart(
         cart.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
         )
       );
     } else {
-      alert("✅ Product added to the cart!");
+      // Add new product to cart
       setCart([...cart, { ...product, quantity: 1 }]);
     }
   };

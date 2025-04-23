@@ -6,7 +6,7 @@ const CartPage = ({ cart, setCart }) => {
     setCart(cart.filter((item) => item.id !== id));
   };
 
-  // Update quantity
+  // Update quantity of the product in cart
   const updateQuantity = (id, change) => {
     setCart(
       cart.map((item) =>
@@ -26,28 +26,63 @@ const CartPage = ({ cart, setCart }) => {
   const finalPrice = total - discount;
 
   return (
-    <div style={{ padding: "30px" }}>
-      <h2>🛒 Cart</h2>
-      {cart.length === 0 ? (
-        <p>Your cart is empty. <a href="/">Go Shopping</a></p>
-      ) : (
-        <div>
-          {cart.map((item) => (
-            <div key={item.id} className="cart-item">
-              <span>{item.title}</span>
-              <span>${(item.price * item.quantity).toFixed(2)}</span>
-              <button onClick={() => updateQuantity(item.id, 1)}>➕</button>
-              <button onClick={() => updateQuantity(item.id, -1)}>➖</button>
-              <button onClick={() => removeFromCart(item.id)}>❌</button>
+    <div className="h-screen bg-gray-100 flex flex-col">
+      <div className="bg-blue-600 text-white p-4 text-center text-xl font-bold">
+        🛒 Your Cart
+      </div>
+      <div className="flex-1 overflow-y-auto p-4">
+        {cart.length === 0 ? (
+          <p>Your cart is empty. <a href="/" className="text-blue-600">Go Shopping</a></p>
+        ) : (
+          <div>
+            {cart.map((item) => (
+              <div key={item.id} className="bg-white p-4 rounded-lg shadow-md mb-4">
+                <div className="flex justify-between items-center">
+                  <span className="text-lg font-semibold">{item.title}</span>
+                  <span className="text-lg">${(item.price * item.quantity).toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between items-center mt-2">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => updateQuantity(item.id, -1)}
+                      className="bg-gray-300 text-gray-700 px-2 py-1 rounded hover:bg-gray-400"
+                    >
+                      ➖
+                    </button>
+                    <span>Quantity: {item.quantity}</span>
+                    <button
+                      onClick={() => updateQuantity(item.id, 1)}
+                      className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"
+                    >
+                      ➕
+                    </button>
+                  </div>
+                  <button
+                    onClick={() => removeFromCart(item.id)}
+                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            ))}
+            <div className="bg-white p-4 rounded-lg shadow-md mt-4">
+              <div className="flex justify-between mb-2">
+                <span>Total:</span>
+                <span>${total.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between mb-2">
+                <span>Discount (10%):</span>
+                <span>-${discount.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between font-semibold">
+                <span>Final Price:</span>
+                <span>${finalPrice.toFixed(2)}</span>
+              </div>
             </div>
-          ))}
-          <div className="total">
-            <p>Total: ${total.toFixed(2)}</p>
-            <p>Discount (10%): -${discount.toFixed(2)}</p>
-            <h3>Final Price: ${finalPrice.toFixed(2)}</h3>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

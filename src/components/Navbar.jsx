@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Import Link component
 
-const Navbar = ({ cartCount, onCartClick }) => {
+const Navbar = ({ cartCount }) => {
   return (
     <nav className="flex justify-between items-center bg-gray-800 text-white p-4 shadow-md">
       <h2
@@ -9,12 +10,12 @@ const Navbar = ({ cartCount, onCartClick }) => {
       >
         Online Shop
       </h2>
-      <button
-        onClick={onCartClick}
+      <Link
+        to="/cart" // Use Link component to navigate to the Cart page
         className="bg-red-600 text-white px-6 py-2 rounded-lg transition duration-300 hover:bg-red-700"
       >
         Cart ({cartCount})
-      </button>
+      </Link>
     </nav>
   );
 };
